@@ -1,0 +1,54 @@
+const $ = new Env("蝦皮自動簽到");
+
+const url = "https://games-dailycheckin.shopee.tw/mkt/coins/api/v2/checkin_new";
+
+const headers = {
+    "Host": "games-dailycheckin.shopee.tw",
+    "Content-Type": "application/json",
+    "User-Agent": "iOS app iPhone Shopee appver=37733 language=zh-Hant app_type=1 platform=native ios_ver=18.7.2",
+    "Accept": "application/json",
+    "Accept-Language": "zh-Hant",
+    "x-api-source": "rn",
+    "af-ac-enc-sz-token": "你的 token 若有",  // 若需要可後續補
+};
+
+const body = {};  // 目前抓包為空 Body 或簡單物件
+
+const myRequest = {
+    url: url,
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(body)
+};
+
+$task.fetch(myRequest).then(response => {
+    if (response.statusCode === 200) {
+        try {
+            let obj = JSON.parse(response.body);
+            console.log(obj);
+
+            if (obj && obj.data && obj.data.success) {
+                const coins = obj.data.increase_coins || "未知";
+                const days = obj.data.check_in_day || "未知";
+                const user = obj.data.username || "會員";
+                $.notify("🦐 蝦皮簽到成功 ✅", `${user}`, `連續簽到 ${days} 天\n本次獲得 ${coins} 蝦幣`);
+            } else {
+                $.notify("🦐 蝦皮簽到", "已簽到或無新獎勵", "今日已完成");
+            }
+        } catch (e) {
+            $.notify("🦐 蝦皮簽到", "解析回應失敗", response.body.substring(0, 100));
+        }
+    } else {
+        $.notify("🦐 蝦皮簽到失敗", `狀態碼: ${response.statusCode}`, "Cookie 可能過期，請重新抓取");
+    }
+    $.done();
+}, reason => {
+    $.notify("🦐 蝦皮簽到", "請求失敗", reason.error);
+    $.done();
+});
+
+// ==================== Env 框架 ====================
+function Env(name) {
+    this.name = name;
+    this.notify = (title, subtitle, message) => $notify(title, subtitle, message);
+}
