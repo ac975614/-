@@ -1,0 +1,82 @@
+const $ = new Env("🦐 蝦皮自動簽到");
+
+// ==================== 自動抓 Cookie ====================
+if (typeof $request !== "undefined") {
+    getCookie();
+    $done();
+} else {
+    checkIn();
+}
+
+// 抓 Cookie
+function getCookie() {
+    const cookie = $request.headers["Cookie"] || $request.headers["cookie"];
+    if (cookie) {
+        const key = "Shopee_Cookie_New";
+        $prefs.setValueForKey(cookie, key);
+        $.notify("🦐 蝦皮 Cookie", "✅ 抓取成功", "可關閉此重寫");
+        console.log("Cookie 已儲存");
+    } else {
+        $.notify("🦐 蝦皮 Cookie", "❌ 抓取失敗", "請檢查重寫");
+    }
+}
+
+// 執行簽到
+function checkIn() {
+    const cookie = $prefs.valueForKey("Shopee_Cookie_New");
+    if (!cookie) {
+        $.notify("🦐 蝦皮簽到", "❌ Cookie 未設定", "請先開啟重寫抓 Cookie");
+        $done();
+        return;
+    }
+
+    const url = "https://games-dailycheckin.shopee.tw/mkt/coins/api/v2/checkin_new";
+
+    const headers = {
+        "Host": "games-dailycheckin.shopee.tw",
+        "Content-Type": "application/json",
+        "User-Agent": "iOS app iPhone Shopee appver=37733 language=zh-Hant app_type=1 platform=native ios_ver=18.7.2",
+        "Accept": "application/json",
+        "Accept-Language": "zh-Hant",
+        "x-api-source": "rn",
+        "Cookie": cookie
+    };
+
+    const myRequest = {
+        url: url,
+        method: "POST",
+        headers: headers,
+        body: "{}"   // 空 body 或依實際調整
+    };
+
+    $task.fetch(myRequest).then(response => {
+        console.log(response.body);
+        if (response.statusCode === 200) {
+            try {
+                let obj = JSON.parse(response.body);
+                if (obj && obj.data && (obj.data.success || obj.data.check_in_day)) {
+                    const coins = obj.data.increase_coins || obj.data.coins || "0";
+                    const days = obj.data.check_in_day || "1";
+                    const user = obj.data.username || "會員";
+                    $.notify("🦐 蝦皮簽到成功 ✅", `${user}`, `連續 ${days} 天\n獲得 ${coins} 蝦幣`);
+                } else {
+                    $.notify("🦐 蝦皮簽到", "今日已簽到", "無新獎勵");
+                }
+            } catch (e) {
+                $.notify("🦐 蝦皮簽到", "回應解析失敗", "");
+            }
+        } else {
+            $.notify("🦐 蝦皮簽到失敗", `狀態碼 ${response.statusCode}`, "Cookie 可能失效，請重新抓取");
+        }
+        $done();
+    }, reason => {
+        $.notify("🦐 蝦皮簽到", "網路請求失敗", reason.error);
+        $done();
+    });
+}
+
+// ==================== Env 框架 ====================
+function Env(name) {
+    this.name = name;
+    this.notify = (title, subtitle, message) => $notify(title, subtitle, message);
+}
