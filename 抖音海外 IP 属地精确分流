@@ -2,18 +2,18 @@
 #!desc=安装后必须为插件 PROXY 指定已有代理策略。
 
 [Rule]
-DOMAIN-SUFFIX,douyincdn.com,DIRECT
-DOMAIN-SUFFIX,douyinliving.com,DIRECT
-DOMAIN-SUFFIX,douyinvod.com,DIRECT
-DOMAIN-SUFFIX,douyinpic.com,DIRECT
-DOMAIN-SUFFIX,bytegecko.com,DIRECT
-DOMAIN-SUFFIX,byteeffecttos.com,DIRECT
-DOMAIN-SUFFIX,byteimg.com,DIRECT
-DOMAIN-SUFFIX,ecombdimg.com,DIRECT
-DOMAIN-SUFFIX,bytehwm.com,DIRECT
-DOMAIN-SUFFIX,bytecdn.com,DIRECT
-DOMAIN-SUFFIX,zjcdn.com,DIRECT
-DOMAIN-KEYWORD,awememusicpgc,DIRECT
-DOMAIN,v9-awememusicpgc.amemv.com,DIRECT
+DOMAIN-SUFFIX,douyincdn.com,PROXY
+DOMAIN-SUFFIX,douyinliving.com,PROXY
+DOMAIN-SUFFIX,douyinvod.com,PROXY
+DOMAIN-SUFFIX,douyinpic.com,PROXY
+DOMAIN-SUFFIX,bytegecko.com,PROXY
+DOMAIN-SUFFIX,byteeffecttos.com,PROXY
+DOMAIN-SUFFIX,byteimg.com,PROXY
+DOMAIN-SUFFIX,ecombdimg.com,PROXY
+DOMAIN-SUFFIX,bytehwm.com,PROXY
+DOMAIN-SUFFIX,bytecdn.com,PROXY
+DOMAIN-SUFFIX,zjcdn.com,PROXY
+DOMAIN-KEYWORD,awememusicpgc,PROXY
+DOMAIN,v9-awememusicpgc.amemv.com,PROXY
 DOMAIN-SUFFIX,snssdk.com,PROXY
 DOMAIN-SUFFIX,amemv.com,PROXY
