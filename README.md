@@ -1,22 +1,22 @@
-#!name=抖音走香港
-#!desc=讓抖音（Douyin）流量強制走香港節點 (HK)
+#!name=大灰狼書源（可切換）
+#!desc=大灰狼聚合書源專用策略組，可手動切換節點
 #!author=Custom
-#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Book.png
+
+[Proxy Group]
+大灰狼 = select,HK,TW,SG,JP,KR,US,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Book.png
 
 [Rule]
-# 抖音核心域名
-DOMAIN-SUFFIX,douyin.com,HK
-DOMAIN-SUFFIX,douyincdn.com,HK
-DOMAIN-SUFFIX,douyinpic.com,HK
-DOMAIN-SUFFIX,douyinvod.com,HK
-DOMAIN-SUFFIX,iesdouyin.com,HK
-DOMAIN-SUFFIX,snssdk.com,HK
-DOMAIN-SUFFIX,amemv.com,HK
-DOMAIN-SUFFIX,byteoversea.com,HK
-DOMAIN-SUFFIX,bytedance.com,HK
-DOMAIN-SUFFIX,pstatp.com,HK
-DOMAIN-SUFFIX,ixigua.com,HK
-DOMAIN-SUFFIX,toutiao.com,HK
-DOMAIN-KEYWORD,douyin,HK
-DOMAIN-KEYWORD,aweme,HK
-DOMAIN-KEYWORD,toutiao,HK
+# 大灰狼主要域名
+DOMAIN-SUFFIX,langge.cf,大灰狼
+DOMAIN-SUFFIX,langge.tk,大灰狼
+DOMAIN-SUFFIX,doubi.tk,大灰狼
+DOMAIN-SUFFIX,czyl.cf,大灰狼
+DOMAIN-SUFFIX,dashabi.tk,大灰狼
+DOMAIN-SUFFIX,dahuilang.cf,大灰狼
+DOMAIN-KEYWORD,langge,大灰狼
+DOMAIN-KEYWORD,czyl,大灰狼
+DOMAIN-KEYWORD,dahuilang,大灰狼
+
+# 常見後備 IP
+IP-CIDR,219.154.201.122/32,大灰狼,no-resolve
