@@ -6,3 +6,4 @@
 [Rewrite]
 # 移除 Google 智慧 App 橫幅相關 Header
 request if ${url} ~= /^https?:\/\/(www\.)?google\.[a-z.]+/ then request.header.del("X-Safari-Smart-App-Banner") | request.header.del("x-ios-smart-app-banner")
+request if ${url} ~= /^https?:\/\/(www\.)?google\.[a-z.]+/search/ then request.header.del("X-Safari-Smart-App-Banner") | request.header.del("x-ios-smart-app-banner") | request.header.del("X-Frame-Options")
