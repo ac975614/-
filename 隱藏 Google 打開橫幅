@@ -1,0 +1,10 @@
+#!name=隱藏 Google 打開橫幅
+#!desc=關閉 Safari 頂部「在 Google App 中打開」提示
+#!author=Custom
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+
+[Rewrite]
+# 移除 Google 智慧 App 橫幅
+^https?://(www\.)?google\.[a-z.]+/.* header-del X-Safari-Smart-App-Banner
+^https?://(www\.)?google\.[a-z.]+/.* header-del x-ios-smart-app-banner
+^https?://(www\.)?google\.[a-z.]+/search.* header-del X-Frame-Options
