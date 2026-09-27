@@ -15,5 +15,9 @@ DOMAIN-KEYWORD,langge,PROXY
 DOMAIN-KEYWORD,czyl,PROXY
 DOMAIN-KEYWORD,dahuilang,PROXY
 
+# 塔讀相關
+DOMAIN,media3.tadu.com,PROXY
+DOMAIN-SUFFIX,tadu.com,PROXY
+
 # 常見後備 IP
 IP-CIDR,219.154.201.122/32,PROXY,no-resolve
